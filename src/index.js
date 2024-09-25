@@ -52,7 +52,25 @@ class Todos {
         this.todos.forEach( item => {
             if (item.title === title) {
                 item.isDone = true;
-                console.log(`Todo ${title} is marked as done.`);
+                console.log(`Todo "${title}" is marked as done.`);
+            }
+        })
+    }
+
+    static setUndone(title) {
+        this.todos.forEach( item => {
+            if (item.title === title) {
+                item.isDone = false;
+                console.log(`Todo "${title}" is marked as undone.`)
+            }
+        })
+    }
+
+    static setPriority(title, priorityLevel) {
+        this.todos.forEach( item => {
+            if (item.title === title) {
+                item.priority = priorityLevel;
+                console.log(`Todo "${title}" priority set to "${priorityLevel}"`)
             }
         })
     }
@@ -66,4 +84,6 @@ console.table(Todos.todos)
 Todos.setDone("b");
 console.table(Todos.todos)
 Todos.setDone("a");
+console.table(Todos.todos)
+Todos.setPriority("a", "high");
 console.table(Todos.todos)
