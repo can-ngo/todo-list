@@ -13,7 +13,7 @@
   ],
   "author": "Can Ngo",
   "license": "ISC",
-  "description": "This is toto list website project",
+  "description": "This is todo list website project",
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "css-loader": "^7.1.2",
