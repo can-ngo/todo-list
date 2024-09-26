@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* .merriweather-sans {
+    font-family: "Merriweather Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+} */
+
 :root {
     --clr-primary: #0D652D;
+    --clr-secondary: #CEEAD6;
     --clr-font: white;
 }
 
@@ -14,13 +24,16 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2em;
 }
 
 #content {
+    background-color: var(--clr-secondary);
     display: flex;
 }
 
 body {
+    font-family: Merriweather Sans;
     min-height: 100vh;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
