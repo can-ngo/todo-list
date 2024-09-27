@@ -4,9 +4,30 @@ import { Display } from "./display.js";
 
 
 
-Todos.addTodo("a", "a work here", new Date(2024,8,24),'low',false,['do x', 'do y', 'do z']);
-Todos.addTodo("b", "have to do b also", new Date(2019,3,13));
-Todos.addTodo("c", "This is c work", new Date(2023,12,20),'medium');
+Todos.addTodo({
+    title: 'a',
+    description: 'This is a work',
+    dueDate: new Date(2024, 9, 1),
+    priority: 'medium',
+    isDone: false,
+    checklist: ['do x', 'do y', 'do z']
+})
+
+Todos.addTodo({
+    title: 'b',
+    description: 'This is b work',
+    dueDate: new Date(2024, 9, 1),
+    priority: 'medium',
+    // isDone: false,
+    checklist: ['do x', 'do y', 'do z']
+})
+
+Todos.addTodo({
+    title: 'c'
+})
+
+
+
 console.table(Todos.todos);
 
 // Todos.deleteTodo("c");

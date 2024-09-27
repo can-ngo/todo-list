@@ -4,7 +4,15 @@ class Todos {
 
     static todos = []
 
-    static addTodo(title, description, dueDate, priority = 'low', isDone = false, checklist = []) {
+    static addTodo({
+        title,
+        description = "",
+        dueDate = new Date(),
+        priority = 'low',
+        isDone = false,
+        checklist = []
+    }) {
+        
         if (typeof title !== 'string' || typeof description !== 'string') {
             throw new Error('Title and description must be strings');
         }
@@ -17,11 +25,11 @@ class Todos {
         if (typeof isDone !== 'boolean') {
             throw new Error('isDone must be a boolean');
         }
-
+    
         if (!Array.isArray(checklist)) {
             throw new Error('Checklist must be an array');
         }
-
+        
         const newTodo = {
             title: title,
             description: description,
@@ -31,7 +39,7 @@ class Todos {
             isDone: isDone,
             checklist: checklist
         }
-
+        
         this.todos.push(newTodo);
         console.log(`Added ${title} to todo list.`)
     }
