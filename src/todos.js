@@ -1,9 +1,10 @@
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
+
 class Todos {
-    content = document.querySelector("#content");
 
     static todos = []
 
-    static addTodo(title, description, dueDate, priority = 'low', isDone = false) {
+    static addTodo(title, description, dueDate, priority = 'low', isDone = false, checklist = []) {
         if (typeof title !== 'string' || typeof description !== 'string') {
             throw new Error('Title and description must be strings');
         }
@@ -17,13 +18,20 @@ class Todos {
             throw new Error('isDone must be a boolean');
         }
 
+        if (!Array.isArray(checklist)) {
+            throw new Error('Checklist must be an array');
+        }
+
         const newTodo = {
             title: title,
             description: description,
             dueDate: dueDate,
+            formattedDueDate: format(dueDate, 'dd-MM-yyyy'),
             priority: priority,
-            isDone: isDone
+            isDone: isDone,
+            checklist: checklist
         }
+
         this.todos.push(newTodo);
         console.log(`Added ${title} to todo list.`)
     }
@@ -45,6 +53,15 @@ class Todos {
                 console.log(`No todo found with title: ${title}`);
             }
         }
+    }
+
+    static setDescription(title, description) {
+        this.todos.forEach(item => {
+            if (item.title === title) {
+                item.description = description;
+                console.log(`Todo ${title}'s description: ${description}`)
+            }
+        })
     }
 
     static setDone(title) {
@@ -74,14 +91,8 @@ class Todos {
         })
     }
 
-    static setDescription(title, description) {
-        this.todos.forEach(item => {
-            if (item.title === title) {
-                item.description = description;
-                console.log(`Todo ${title}'s description: ${description}`)
-            }
-        })
-    }
+
+
 }
 
 export { Todos }
