@@ -1,9 +1,12 @@
+import { Todos } from "./todos.js";
+
 const content = document.querySelector("#content");
 
 function displayTodos (todos) {
-    todos.forEach(todo => {
+    todos.forEach((todo,index) => {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
+        card.setAttribute('id',`todo-${index}`)
         content.appendChild(card);
 
         let checklistHtml = '';
@@ -19,10 +22,19 @@ function displayTodos (todos) {
         <p>Due: ${todo.formattedDueDate}</p>
         <p>${checklistHtml}</p>
         <div>
-            <button>Change priority</button>
-            <button>Delete</button>
+            <button class="editChecklist-btn">Edit checklist</button>
+            <button class="delete-btn">Delete</button>
         </div>
         `
+
+        const deleteBtn = card.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', (e) => {
+            e.target.parentNode.parentNode.remove();
+            Todos.deleteTodo(todo.title);
+            console.table(Todos.todos);
+        })
+        
+        
     });
 }
 

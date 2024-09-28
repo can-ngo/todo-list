@@ -44,6 +44,15 @@ class Todos {
         console.log(`Added ${title} to todo list.`)
     }
 
+    static modifyChecklist(title, [...checklist]) {
+        this.todos.forEach(item => {
+            if (item.title === title){
+                item.checklist = checklist;
+                console.log(`Todo "${title}" checklist was modified.`)
+            }
+        })
+    }
+
     static deleteTodo(title) {
         if (!isNaN(title)) {
             if (title >= 0 && title <= this.todos.length){
@@ -61,6 +70,11 @@ class Todos {
                 console.log(`No todo found with title: ${title}`);
             }
         }
+    }
+
+    static deleteAll() {
+        this.todos = [];
+        console.log(`All todos are cleared!`)
     }
 
     static setDescription(title, description) {

@@ -2,10 +2,21 @@ import "./styles.css";
 import { Todos } from "./todos.js";
 import { displayTodos } from "./displayTodos.js";
 import { displayControls } from "./displayControls.js";
+import { clearAll } from "./clearAll.js";
 
+const { addNewBtn, filter, clearAllBtn } = displayControls();
 
+addNewBtn.addEventListener("click", event => {
+    console.log("Hello");
+})
 
-displayControls();
+filter.addEventListener("change", (event) => {
+    console.log(event.target.value)
+})
+
+clearAllBtn.addEventListener("click", () => {
+    clearAll();
+})
 
 Todos.addTodo({
     title: 'a',
@@ -43,15 +54,19 @@ Todos.addTodo({
 })
 
 Todos.addTodo({
-    title: 'e'
+    title: 'g'
 })
 
 
 displayTodos(Todos.todos);
 
+
 console.table(Todos.todos);
 
 // Todos.deleteTodo("c");
+// console.table(Todos.todos);
+
+// Todos.deleteAll();
 // console.table(Todos.todos);
 
 // Todos.setDone("b");
@@ -64,4 +79,7 @@ console.table(Todos.todos);
 // console.table(Todos.todos)
 
 // Todos.setDescription("b", "This is b work");
+// console.table(Todos.todos);
+
+// Todos.modifyChecklist("c", ["do this", "do that"]);
 // console.table(Todos.todos);
