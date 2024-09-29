@@ -113,7 +113,11 @@ class Todos {
         })
     }
 
-
+    static filterByPriority(priority) {
+        console.log(`Following are todos with "${priority}" priority`);
+        const filteredTodos =  this.todos.filter(todo => todo.priority === priority);
+        return filteredTodos;
+    }
 
 }
 

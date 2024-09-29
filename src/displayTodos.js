@@ -22,7 +22,7 @@ function displayTodos (todos) {
         <p>Due: ${todo.formattedDueDate}</p>
         <p>${checklistHtml}</p>
         <div>
-            <button class="editChecklist-btn">Edit checklist</button>
+            <button class="edit-btn">Edit</button>
             <button class="delete-btn">Delete</button>
         </div>
         `
@@ -34,6 +34,10 @@ function displayTodos (todos) {
             console.table(Todos.todos);
         })
         
+        const editBtn = card.querySelector('.edit-btn');
+        editBtn.addEventListener('click', (e) => {
+            
+        })
         
     });
 }

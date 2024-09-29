@@ -34,6 +34,14 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif|webp|svg)$/i,
                 type: "asset/resource",
             },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: ["url-loader"]
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: ["file-loader"]
+            }
         ],
     },
 };

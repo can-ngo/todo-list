@@ -1,17 +1,30 @@
 import "./styles.css";
+
 import { Todos } from "./todos.js";
 import { displayTodos } from "./displayTodos.js";
 import { displayControls } from "./displayControls.js";
+import { addNewModal } from "./addNewModal.js";
 import { clearAll } from "./clearAll.js";
 
 const { addNewBtn, filter, clearAllBtn } = displayControls();
 
 addNewBtn.addEventListener("click", event => {
     console.log("Hello");
+    addNewModal();
 })
 
 filter.addEventListener("change", (event) => {
-    console.log(event.target.value)
+    const priority = event.target.value;
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.remove();
+    })
+
+    if (priority === 'all') {
+        displayTodos(Todos.todos);    
+    } else {
+        displayTodos(Todos.filterByPriority(priority));
+    }
 })
 
 clearAllBtn.addEventListener("click", () => {
@@ -50,18 +63,19 @@ Todos.addTodo({
 
 Todos.addTodo({
     title: 'f',
+    priority: 'high',
     dueDate: new Date(2024, 8, 30)
 })
 
 Todos.addTodo({
-    title: 'g'
+    title: 'g',
+    priority: 'medium'
 })
 
 
 displayTodos(Todos.todos);
-
-
 console.table(Todos.todos);
+
 
 // Todos.deleteTodo("c");
 // console.table(Todos.todos);
