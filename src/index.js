@@ -5,13 +5,48 @@ import { displayTodos } from "./displayTodos.js";
 import { displayControls } from "./displayControls.js";
 import { addNewModal } from "./addNewModal.js";
 import { clearAll } from "./clearAll.js";
+import { now } from "d3";
 
-const { addNewBtn, filter, clearAllBtn } = displayControls();
+const { openModalBtn, filter, clearAllBtn } = displayControls();
 
-addNewBtn.addEventListener("click", event => {
-    console.log("Hello");
-    addNewModal();
+openModalBtn.addEventListener("click", event => {
+    const { addNewTodoBtn,
+            closeModalBtn,
+            overlay,
+            todoTitle,
+            todoDescription,
+            todoDuedate,
+            todoSelectedPriority } = addNewModal();
+
+    closeModalBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        overlay.style.display = 'none'
+    })
+    
+    addNewTodoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        Todos.addTodo({
+            title: todoTitle.value,
+            description: todoDescription.value,
+            dueDate: todoDuedate.value ? new Date(todoDuedate.value) : undefined,
+            priority: todoSelectedPriority.value
+        })
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+        card.remove();
+        })
+
+        displayTodos(Todos.todos);
+
+        overlay.style.display = 'none'
+        console.table(Todos.todos);
+    })
+
 })
+
+
 
 filter.addEventListener("change", (event) => {
     const priority = event.target.value;

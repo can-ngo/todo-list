@@ -30,8 +30,24 @@ export function addNewModal () {
                         <label for="todo-priority-low">Low</label>
                 </div>
             </p>
-            <button id="add-newtodo-button" type="button">Finish</button>
-            <i id="close-btn" class="fa-solid fa-circle-xmark" style="color: red;"></i>
+            <div>
+                <button id="add-newtodo-btn" type="button">Finish</button>
+                <button id="close-modal-btn" type "button">Close</button>
+            </div>
         </form>
     `
+    const addNewTodoBtn = document.querySelector('#add-newtodo-btn');
+    const closeModalBtn = document.querySelector('#close-modal-btn');
+    const todoTitle = document.querySelector('#todo-title');
+    const todoDescription = document.querySelector('#todo-description');
+    const todoDuedate = document.querySelector('#todo-duedate');
+    const todoSelectedPriority = document.querySelector('input[name="todoPriority"]:checked');
+
+    return { addNewTodoBtn,
+             closeModalBtn,
+             overlay,
+             todoTitle,
+             todoDescription,
+             todoDuedate,
+             todoSelectedPriority }
 }

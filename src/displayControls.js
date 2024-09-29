@@ -3,7 +3,7 @@ const controls = document.querySelector('#control');
 function displayControls() {
     controls.innerHTML = 
     `
-    <button id='newTodo-btn'>Add new to-do</button>
+    <button id='open-modal-btn'>Add new to-do</button>
     <label for='filter'>Filter by priority</label>
     <select id='filter'>
         <option value='all' selected>All</option>
@@ -14,10 +14,10 @@ function displayControls() {
     <button id='clearAll-btn'>Clear All</button>
     `
     
-    const addNewBtn = document.querySelector('#newTodo-btn');
+    const openModalBtn = document.querySelector('#open-modal-btn');
     const filter = document.querySelector('#filter');
     const clearAllBtn = document.querySelector('#clearAll-btn');
-    return { addNewBtn, filter, clearAllBtn }
+    return { openModalBtn, filter, clearAllBtn }
 }
 
 export { displayControls }
