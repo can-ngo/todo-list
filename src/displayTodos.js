@@ -17,9 +17,9 @@ function displayTodos (todos) {
         card.innerHTML = 
         `
         <h3>${todo.title}</h3>
+        <p><i>${todo.description}</i></p>
+        <p><strong>Due:</strong> ${todo.formattedDueDate}</p>
         <p>Priority: <strong class="priority-${todo.priority}">${todo.priority}</strong></p>
-        <p>${todo.description}</p>
-        <p>Due: ${todo.formattedDueDate}</p>
         <p>${checklistHtml}</p>
         <div>
             <button class="edit-btn">Edit</button>

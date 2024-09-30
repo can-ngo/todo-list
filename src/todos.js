@@ -8,7 +8,7 @@ class Todos {
         title,
         description = "",
         dueDate = new Date(),
-        priority = 'low',
+        priority = 'medium',
         isDone = false,
         checklist = []
     }) {

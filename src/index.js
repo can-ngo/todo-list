@@ -5,32 +5,91 @@ import { displayTodos } from "./displayTodos.js";
 import { displayControls } from "./displayControls.js";
 import { addNewModal } from "./addNewModal.js";
 import { clearAll } from "./clearAll.js";
-import { now } from "d3";
 
 const { openModalBtn, filter, clearAllBtn } = displayControls();
 
 openModalBtn.addEventListener("click", event => {
-    const { addNewTodoBtn,
+    const { todoForm,
+            addNewTodoBtn,
             closeModalBtn,
             overlay,
             todoTitle,
             todoDescription,
             todoDuedate,
-            todoSelectedPriority } = addNewModal();
+            todoPriorities,
+            addChecklistBtn,
+            checklistInput,
+            checklistContainer } = addNewModal();
+
+    let checklistArray = [];
+    let selectedPriority; //default value is 'medium'
 
     closeModalBtn.addEventListener('click', (e) => {
         e.preventDefault();
         overlay.style.display = 'none'
     })
     
+    addChecklistBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const itemText = checklistInput.value.trim();
+        
+        if (itemText !== "") {
+            // Create a new div to hold the checklist item and remove button
+            const checklistItemDiv = document.createElement('div');
+            checklistItemDiv.classList.add('checklist-item');
+            
+            // Create a new input element for the checklist item
+            const checklistItemInput = document.createElement('input');
+            checklistItemInput.type = 'text';
+            checklistItemInput.name = 'checklist[]'; // Name array to group items
+            checklistItemInput.value = itemText;
+            checklistItemInput.readOnly = true;
+            checklistItemInput.style.width = '90%';
+            checklistItemInput.placeholder = 'Add checklist item';
+            
+            // Create a remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.textContent = '-';
+            removeBtn.addEventListener('click', function() {
+                // checklistContainer.removeChild(checklistItemDiv);
+                checklistItemDiv.remove();
+            });
+            
+            // Append the input and remove button to the div
+            checklistItemDiv.appendChild(checklistItemInput);
+            checklistItemDiv.appendChild(removeBtn);
+            
+            // Append the div to the checklist container
+            console.log(checklistInput.parentElement);
+            checklistInput.insertAdjacentElement('beforebegin', checklistItemDiv);
+            // checklistContainer.appendChild(checklistItemDiv);
+            // checklistContainer.insertBefore(checklistItemDiv, checklistInput.parentElement);
+            
+            // Clear the input field for the next item
+            checklistInput.value = '';
+        }
+        
+        const checklistItems = document.querySelectorAll('input[name="checklist[]"]');
+        checklistArray = Array.from(checklistItems).map(item => item.value);
+        checklistArray = checklistArray.filter(item => item !== "");
+    })
+
+    todoPriorities.forEach( radio => {
+        radio.addEventListener('change', () => {  
+            selectedPriority = radio.value;
+        })
+    })
+
     addNewTodoBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         Todos.addTodo({
             title: todoTitle.value,
             description: todoDescription.value,
             dueDate: todoDuedate.value ? new Date(todoDuedate.value) : undefined,
-            priority: todoSelectedPriority.value
+            priority: selectedPriority,
+            checklist: checklistArray
         })
 
         const cards = document.querySelectorAll('.card');
@@ -67,46 +126,26 @@ clearAllBtn.addEventListener("click", () => {
 })
 
 Todos.addTodo({
-    title: 'a',
-    description: 'This is a work',
+    title: 'Clean house',
+    description: 'My house',
     dueDate: new Date(2024, 9, 1),
-    priority: 'high',
     isDone: false,
-    checklist: ['do x', 'do y', 'do z']
+    checklist: ['sweep floor', 'vacuum cleaner']
 })
 
 Todos.addTodo({
-    title: 'b',
-    description: 'This is b work',
-    dueDate: new Date(2024, 9, 1),
-    priority: 'medium',
+    title: 'Study Web Dev',
+    dueDate: new Date(2024, 10, 15),
+    priority: 'low',
     // isDone: false,
-    checklist: ['do x', 'do y', 'do z']
+    checklist: ['learn Javascript', 'make todo project', 'learn Git']
 })
 
 Todos.addTodo({
-    title: 'c'
+    title: 'Take wife to doctor',
+    description: 'For pregnancy check',
+    priority: 'high'
 })
-
-Todos.addTodo({
-    title: 'd'
-})
-
-Todos.addTodo({
-    title: 'e'
-})
-
-Todos.addTodo({
-    title: 'f',
-    priority: 'high',
-    dueDate: new Date(2024, 8, 30)
-})
-
-Todos.addTodo({
-    title: 'g',
-    priority: 'medium'
-})
-
 
 displayTodos(Todos.todos);
 console.table(Todos.todos);
