@@ -147,9 +147,16 @@ Todos.addTodo({
     priority: 'high'
 })
 
+Todos.addTodo({
+    title: 'a',
+    priority: 'low'
+})
+
 displayTodos(Todos.todos);
 console.table(Todos.todos);
 
+Todos.changeDuedate('a', new Date(2020,11,3));
+console.table(Todos.todos);
 
 // Todos.deleteTodo("c");
 // console.table(Todos.todos);

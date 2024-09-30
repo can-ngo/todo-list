@@ -1,4 +1,4 @@
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
+import { format, formatDistance, formatRelative, subDays, isDate } from "date-fns";
 
 class Todos {
 
@@ -44,6 +44,15 @@ class Todos {
         console.log(`Added ${title} to todo list.`)
     }
 
+    static renameTitle(title, newTitle) {
+        this.todos.forEach(item => {
+            if (item.title === title) {
+                item.title = newTitle;
+                console.log(`Todo "${title}" changed to "${newTitle}"`)
+            }
+        })
+    }
+
     static modifyChecklist(title, [...checklist]) {
         this.todos.forEach(item => {
             if (item.title === title){
@@ -51,6 +60,25 @@ class Todos {
                 console.log(`Todo "${title}" checklist was modified.`)
             }
         })
+    }
+
+    static changeDuedate(title, newDuedate){
+        if (newDuedate instanceof Date && !isNaN(newDuedate)) {
+            let found = false;
+            this.todos.forEach(item => {
+                if(item.title === title) {
+                    item.dueDate = new Date(newDuedate);
+                    item.formattedDueDate = format(newDuedate, 'dd-MM-yyyy');
+                    found = true;
+                    console.log(`Todo ${title}'s due date change to ${newDuedate}.`);
+                }
+            });
+            if (!found) {
+                console.log(`Todo with title "${title}" not found.`);
+            }
+        } else {
+            throw new Error('New due date must be a date Object')
+        }
     }
 
     static deleteTodo(title) {

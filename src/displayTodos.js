@@ -22,7 +22,7 @@ function displayTodos (todos) {
         <p>Priority: <strong class="priority-${todo.priority}">${todo.priority}</strong></p>
         <p>${checklistHtml}</p>
         <div>
-            <button class="edit-btn">Edit</button>
+            <button class="edit-btn" id="edit-btn-${index}">Edit</button>
             <button class="delete-btn">Delete</button>
         </div>
         `
@@ -36,7 +36,8 @@ function displayTodos (todos) {
         
         const editBtn = card.querySelector('.edit-btn');
         editBtn.addEventListener('click', (e) => {
-            
+            //Display edit form with card information
+            //when submit button click => edit functions
         })
         
     });
