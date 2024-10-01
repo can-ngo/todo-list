@@ -56,8 +56,6 @@ openModalBtn.addEventListener("click", event => {
             // Append the div to the checklist container
             console.log(checklistInput.parentElement);
             checklistInput.insertAdjacentElement('beforebegin', checklistItemDiv);
-            // checklistContainer.appendChild(checklistItemDiv);
-            // checklistContainer.insertBefore(checklistItemDiv, checklistInput.parentElement);
             
             // Clear the input field for the next item
             checklistInput.value = '';
@@ -92,7 +90,7 @@ openModalBtn.addEventListener("click", event => {
 
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
-        card.remove();
+            card.remove();
         })
 
         displayTodos(Todos.todos);

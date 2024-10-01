@@ -55,6 +55,7 @@ export function editModal (todo, index) {
     const checklistContainer = document.querySelector('#checklist-items');
 
     let selectedPriority;
+    let checklistArray = [];
 
     closeModalBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -67,6 +68,50 @@ export function editModal (todo, index) {
         })
     })
 
+    addChecklistBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const itemText = checklistInput.value.trim();
+        
+        if (itemText !== "") {
+            // Create a new div to hold the checklist item and remove button
+            const checklistItemDiv = document.createElement('div');
+            checklistItemDiv.classList.add('checklist-item');
+            
+            // Create a new input element for the checklist item
+            const checklistItemInput = document.createElement('input');
+            checklistItemInput.type = 'text';
+            checklistItemInput.name = 'checklist[]'; // Name array to group items
+            checklistItemInput.value = itemText;
+            checklistItemInput.readOnly = true;
+            checklistItemInput.style.width = '90%';
+            checklistItemInput.placeholder = 'Add checklist item';
+            
+            // Create a remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.textContent = '-';
+            removeBtn.addEventListener('click', function() {
+                // checklistContainer.removeChild(checklistItemDiv);
+                checklistItemDiv.remove();
+            });
+            
+            // Append the input and remove button to the div
+            checklistItemDiv.appendChild(checklistItemInput);
+            checklistItemDiv.appendChild(removeBtn);
+            
+            // Append the div to the checklist container
+            console.log(checklistInput.parentElement);
+            checklistInput.insertAdjacentElement('beforebegin', checklistItemDiv);
+            
+            // Clear the input field for the next item
+            checklistInput.value = '';
+        }
+        
+        const checklistItems = document.querySelectorAll('input[name="checklist[]"]');
+        checklistArray = Array.from(checklistItems).map(item => item.value);
+        checklistArray = checklistArray.filter(item => item !== "");
+    })
+
     editTodoBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -74,10 +119,11 @@ export function editModal (todo, index) {
         Todos.setDescription(todo.title, todoDescription.value);
         Todos.changeDuedate(todo.title, new Date(todoDuedate.value));
         Todos.setPriority(todo.title, selectedPriority);
+        Todos.modifyChecklist(todo.title, checklistArray);
 
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
-        card.remove();
+            card.remove();
         })
 
         displayTodos(Todos.todos);
