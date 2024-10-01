@@ -1,9 +1,10 @@
+import { editModal } from "./editNewModal.js";
 import { Todos } from "./todos.js";
 
 const content = document.querySelector("#content");
 
 function displayTodos (todos) {
-    todos.forEach((todo,index) => {
+    todos.forEach((todo, index) => {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
         card.setAttribute('id',`todo-${index}`)
@@ -37,7 +38,10 @@ function displayTodos (todos) {
         const editBtn = card.querySelector('.edit-btn');
         editBtn.addEventListener('click', (e) => {
             //Display edit form with card information
-            //when submit button click => edit functions
+            editModal(todo);
+            //Functioning buttons in edit modal
+            
+
         })
         
     });

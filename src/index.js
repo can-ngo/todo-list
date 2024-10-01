@@ -9,25 +9,18 @@ import { clearAll } from "./clearAll.js";
 const { openModalBtn, filter, clearAllBtn } = displayControls();
 
 openModalBtn.addEventListener("click", event => {
-    const { todoForm,
+    const { 
             addNewTodoBtn,
-            closeModalBtn,
             overlay,
             todoTitle,
             todoDescription,
             todoDuedate,
             todoPriorities,
             addChecklistBtn,
-            checklistInput,
-            checklistContainer } = addNewModal();
+            checklistInput } = addNewModal();
 
     let checklistArray = [];
     let selectedPriority; //default value is 'medium'
-
-    closeModalBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        overlay.style.display = 'none'
-    })
     
     addChecklistBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -83,6 +76,11 @@ openModalBtn.addEventListener("click", event => {
 
     addNewTodoBtn.addEventListener('click', (e) => {
         e.preventDefault();
+
+        if (!todoTitle.value) {
+            alert('Todo have to has title')
+            return
+        }
 
         Todos.addTodo({
             title: todoTitle.value,
@@ -155,8 +153,8 @@ Todos.addTodo({
 displayTodos(Todos.todos);
 console.table(Todos.todos);
 
-Todos.changeDuedate('a', new Date(2020,11,3));
-console.table(Todos.todos);
+// Todos.changeDuedate('a', new Date(2020,11,3));
+// console.table(Todos.todos);
 
 // Todos.deleteTodo("c");
 // console.table(Todos.todos);
