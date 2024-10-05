@@ -31,13 +31,13 @@ class Todos {
         }
         
         const newTodo = {
-            title: title,
-            description: description,
-            dueDate: dueDate,
+            title,
+            description,
+            dueDate,
             formattedDueDate: format(dueDate, 'dd-MM-yyyy'),
-            priority: priority,
-            isDone: isDone,
-            checklist: checklist
+            priority,
+            isDone,
+            checklist
         }
         
         this.todos.push(newTodo);
